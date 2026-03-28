@@ -126,25 +126,45 @@ If a matching pack you own already exists, ask:
 
 ## Step 5: Create ZIP Package
 
-Create a ZIP file at `/tmp/clawmart-{random}.zip` with this structure:
+**CRITICAL: All paths inside the zip must be RELATIVE (no leading `/`, `~`, or `Users/...` segments).**
 
-```
-pack.zip
-├── claude.soul.md          ← config files at root
-├── coding.agents.md
-├── startup.boot.md
-├── memory_projects.json
-└── skills/
-    ├── deep-research/      ← each self-made skill as a folder
-    │   └── SKILL.md
-    └── my-translator/
-        └── SKILL.md
+Use a staging directory so that `zip` captures only filenames, not absolute paths:
+
+```bash
+RAND=$(python3 -c "import random,string; print(''.join(random.choices(string.ascii_lowercase+string.digits,k=6)))")
+STAGING="/tmp/clawmart-staging-$RAND"
+ZIPFILE="/tmp/clawmart-$RAND.zip"
+mkdir -p "$STAGING/skills"
+
+# Copy config files flat into root (just the filename, no subdirs)
+for f in <included config files>; do
+  cp "$f" "$STAGING/"
+done
+
+# Copy each included self-made skill folder into skills/
+for skill_dir in <included skill dirs>; do
+  cp -r "$skill_dir" "$STAGING/skills/"
+done
+
+# Create zip FROM inside staging dir so paths are relative
+(cd "$STAGING" && zip -r "$ZIPFILE" .)
+
+# Verify — output should show "SOUL.md" NOT "Users/foo/SOUL.md"
+unzip -l "$ZIPFILE"
+
+rm -rf "$STAGING"
 ```
 
-Rules:
-- Config files (SOUL, AGENTS, BOOT, HEARTBEAT, MEMORY) go at the **root** of the zip
-- Skill folders go inside a `skills/` subdirectory, preserving the folder structure
-- Verify the zip contains no `../` path traversal
+The final zip structure must look like:
+```
+SOUL.md              ← at root, NOT Users/zepingchen/.../SOUL.md
+AGENTS.md
+skills/
+    deep-research/
+        SKILL.md
+```
+
+**If `unzip -l` shows absolute paths, discard and recreate.**
 
 ---
 
