@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "skills": {
+    "akshare-a-stock": {
+      "version": "1.0.1",
+      "installedAt": 1774756250179
+    },
+    "news-sentiment-scan": {
+      "version": "1.0.0",
+      "installedAt": 1774756257187
+    },
+    "china-stock-sentiment": {
+      "version": "0.1.1",
+      "installedAt": 1774756260414
+    },
+    "cctv-news-fetcher": {
+      "version": "1.0.0",
+      "installedAt": 1774756268448
+    },
+    "aigc-news-sentiment": {
+      "version": "1.0.0",
+      "installedAt": 1774756271593
+    },
+    "market-news": {
+      "version": "1.0.0",
+      "installedAt": 1774756274629
+    },
+    "a-share-signal": {
+      "version": "1.0.1",
+      "installedAt": 1774756282205
+    },
+    "news-sentiment-analysis": {
+      "version": "1.0.0",
+      "installedAt": 1774756285115
+    },
+    "hot-news-aggregator": {
+      "version": "1.0.0",
+      "installedAt": 1774756429023
+    },
+    "clawmart-upload": {
+      "version": "1.0.1",
+      "installedAt": 1774804390821
+    }
+  }
+}
