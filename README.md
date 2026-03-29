@@ -13,20 +13,13 @@ Two OpenClaw skills for uploading and installing configuration packs from [ClawM
 
 Once OpenClaw is running, just say:
 
-> 帮我从 GitHub 安装 clawmart skills
+> 帮我安装 clawmart-install 和 clawmart-upload
 
 Or use clawhub CLI directly:
 
 ```bash
-clawhub install github:rxdaozhang/clawmart-skills/clawmart-install
-clawhub install github:rxdaozhang/clawmart-skills/clawmart-upload
-```
-
-Or copy manually:
-
-```bash
-cp -r clawmart-install ~/.openclaw/skills/
-cp -r clawmart-upload ~/.openclaw/skills/
+clawhub install clawmart-install
+clawhub install clawmart-upload
 ```
 
 ## Setup
